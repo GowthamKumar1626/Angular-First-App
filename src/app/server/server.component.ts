@@ -7,19 +7,25 @@ import { Component, OnInit } from '@angular/core';
 export class ServerComponent implements OnInit {
   serverName: string = '';
   allowNewServer = false;
-  serverCreationStatus = 'No server was created';
+  serverCreated = false;
+  serverStatus = 'offline';
+
   constructor() {
-    setTimeout(() => {
-      this.allowNewServer = true;
-    }, 2000);
+    // setTimeout(() => {
+    //   this.allowNewServer = true;
+    // }, 2000);
+    this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
   }
   ngOnInit() {}
 
   onCreateServer() {
-    this.serverCreationStatus =
-      'Server was created under name ' + this.serverName;
+    this.serverCreated = true;
   }
   onUpdateServerName(event: Event) {
     this.serverName = (<HTMLInputElement>event.target).value;
+  }
+
+  getColor() {
+    return this.serverStatus === 'online' ? 'green' : 'red';
   }
 }

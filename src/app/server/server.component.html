@@ -19,6 +19,20 @@
 </button>
 <br />
 <br />
-<p>{{ serverCreationStatus }}</p>
+<p *ngIf="serverCreated; else noServer">
+  Server was created, server name is {{ serverName }}
+</p>
+<p
+  *ngIf="serverCreated; else noServerColor"
+  [ngStyle]="{ backgroundColor: getColor() }"
+>
+  {{ serverStatus }}
+</p>
+<ng-template #noServer>
+  <p>No server was created</p>
+</ng-template>
+<ng-template #noServerColor>
+  <p></p>
+</ng-template>
 <!-- <p>{{ serverName }}</p> -->
 <!-- <p>Server name: {{ serverName }}</p> -->
